@@ -3,10 +3,10 @@ Closures Explained
 ===================
 
 .. meta::
-   :description: Python closures explained! A closure is a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory.
-   :keywords: plaintext, markup language
+   :description: A closure is a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory. This article explains what closures in Python.
+   :keywords: closures, python
    
-.. index:: closures, tutorial
+.. index:: closures
 
 **A CLOSURE is a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory** [#f1]_. If you have ever written a function that returned another function, you probably may have used closures even without knowing about them.
 

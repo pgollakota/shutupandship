@@ -9,6 +9,6 @@ Welcome!
 ========
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    articles/toc
