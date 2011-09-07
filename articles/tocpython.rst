@@ -6,3 +6,4 @@ Python
    
    closures/index
    iterators/index
+   decorators/index
