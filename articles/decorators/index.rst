@@ -34,7 +34,7 @@ First let us deal with the formalities like definition, syntax, etc. What is a d
 As you can see, strictly speaking we don't need the decorator syntax. We can accomplish the goal, by rebinding the function name after definition. But having decorator syntax is a nice language feature and experts have already commented on the virtues of having the decorator syntax in Python (see references). So I'll just move on. Technically, decorator just needs to be a callable. So it can either be a function or a class with ``__call__`` method defined. In this article I'll only focus on decorator functions. With minor modifications the same will apply to decorator classes.
 
 Writing our own decorators
-===========================
+---------------------------
 
 Let us pretend we are writing a module with various business math functions and we decide that we cannot accept values of ``n`` (the term of the loan) less than or equal to zero. Of course, we can always embed that in our function logic, but that is repetitive, boring and also doesn't play well with this demonstration of decorators. So let us all just agree that we want to use decorators to accomplish this objective. 
 
@@ -99,7 +99,7 @@ Let's see if compound interest works. ::
     <function f_n_gt_zero at 0x9ee9454>
     >>> compoundinterest(10, 100, 5)
 
-Houston! We have a problem! All the decorated functions are going to have the same name - ``f_n_gt_zero``. This may not be a problem for only a couple of functions. But what if the number of functions increase? You can see where this is going to go ... straight to debug hell! 
+Houston, we have a problem. All the decorated functions are going to have the same name - ``f_n_gt_zero``. This may not be a problem for only a couple of functions. But what if the number of functions increase? You can see where this is going to go ... straight to debug hell! 
 
 There's a decorator for that!
 -----------------------------
