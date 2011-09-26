@@ -1,5 +1,9 @@
 import fabric
 from fabric.api import env, local, sudo, cd, prefix
+
+import sys
+import fileinput
+import re
 from path import path
 
 env.hosts = ['praveen@173.255.241.59']
@@ -19,9 +23,17 @@ def refresh_css():
         cwd = path('.')
         css_files = list(cwd.walk('*.css'))
         for css_file in css_files:
-            name = css_file.basename()
-            mtime = css_file.mtime
-            local("find . -name \*.html -type f -print | xargs sed -i s@_static/%s@_static/%s?m=%s@g" % (name, name, mtime) )
+            name = css_file.namebase
+            mtime = int(css_file.mtime)
+            pattern = "%s\.[0-9]*\.?css" % name
+            repl = "%s.%s.css" % (name, mtime)
+
+            # Walk through all html files and rewrite references to index.css or index.12345.css as index.76533.css where 76533 is the modification time of index.css
+            html_files = list(cwd.walk('*.html'))
+            for html_file in html_files:
+                for line in fileinput.input(html_file, inplace=1):
+                    line = re.sub(pattern, repl, line)
+                    sys.stdout.write(line)
 
 
 def deploy():
