@@ -52,7 +52,7 @@ Let's start with what we need to accomplish. We should write a decorator ``accep
     def simpleinterest(n, p, r):
         ...
 
-Such that when you call the functions with ``n <= 0``, the functions raise an exception, and return the correct answer when called with ``n > 0``. In other words ``accept_n_gt_zero_only(simpleinterest)`` must have this behavior. So our decorator ``accept_n_gt_zero_only`` must take a function as an argument and return another function. Let's flush it out. ::
+Such that when you call the functions with ``n <= 0``, the functions raise an exception, and return the correct answer when called with ``n > 0``. In other words ``accept_n_gt_zero_only(simpleinterest)`` must have this behavior. So our decorator ``accept_n_gt_zero_only`` must take a function as an argument and return another function. Let's flesh it out. ::
     
     # first draft ... incomplete
     def accept_n_gt_zero_only(f):
