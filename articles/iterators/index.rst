@@ -6,7 +6,7 @@
    
 .. index:: iterable, iterator
 
-Python Iterables, Iterators and the Iterator Protocol
+Python Iterables, Iterators and the Iteration Protocol
 =====================================================
 
 The for loop, just like everything else in Python, is really simple. For a wide range of containers you can just do ``for i in container: do something``. How does this work? And more importantly, if you create your own container how can you make sure that it supports this syntax?
