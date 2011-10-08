@@ -4,7 +4,7 @@ from fabric.api import env, local, sudo, cd, prefix
 import sys
 import fileinput
 import re
-from path import path
+#from path import path
 
 env.hosts = ['praveen@173.255.241.59']
 env.sphinx_root = '/home/praveen/cows/shutupandship'
@@ -40,6 +40,6 @@ def deploy():
     local('hg push ' + master_repo)
     run('hg pull -u ' + master_repo)
     run('make html')
-    run('fab refresh_css')
+    #run('fab refresh_css')
 
 
