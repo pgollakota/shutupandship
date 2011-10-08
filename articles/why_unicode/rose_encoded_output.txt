@@ -1,0 +1,15 @@
+Rose (code point U+73AB) in various encodings
+*********************************************
+        big5: AA B4 
+   big5hkscs: AA B4 
+       cp950: AA B4 
+      gb2312: C3 B5 
+         gbk: C3 B5 
+     gb18030: C3 B5 
+          hz: 7E 7B 43 35 7E 7D 
+iso2022_jp_2: 1B 24 28 44 4B 60 1B 28 42 
+      utf_16: FF FE AB 73 
+   utf_16_be: 73 AB 
+   utf_16_le: AB 73 
+       utf_8: E7 8E AB 
+   utf_8_sig: EF BB BF E7 8E AB 

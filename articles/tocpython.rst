@@ -8,3 +8,4 @@ Python
    iterators/index
    decorators/index
    file_modes/index
+   why_unicode/index

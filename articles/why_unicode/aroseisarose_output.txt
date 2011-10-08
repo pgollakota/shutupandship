@@ -1,0 +1,3 @@
+len(rose): 15, len(rose_uni): 13
+rose: 'A \xe7\x8e\xab is a rose', rose_uni: u'A \u73ab is a rose'
+rose[2]: '\xe7', rose_uni[2]: u'\u73ab'
