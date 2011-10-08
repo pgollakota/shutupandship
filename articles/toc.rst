@@ -5,3 +5,4 @@ Articles
   :maxdepth: 2
 
   tocpython
+  tochtml
