@@ -2,18 +2,18 @@
    :description: Decorators in Python are callables that return callables. This article explains what decorators are, the difference between decorators with arguments and decorators without arguments and how to write your own decorators. It also explains a practical application of decorators in the context of the web framework - Django.
 
    :keywords: decorators, django, python
-   
+
 .. index:: decorator
 
 Python Decorators I - functions that decorate functions
 ========================================================
 
-Decorators have been in Python since version 2.4. They are the lines that start with ``@`` symbol just before a function or a class definition. Probably you encountered them when you defined classmethods, properties etc. Or perhaps you used a web framework like Django and used them to magically add login requirements for certain pages by adding a @login_required line before your view function. Have you wondered how they exactly work and what they are? This article explores what function decorators are and how to write decorators. 
+Decorators have been in Python since version 2.4. They are the lines that start with ``@`` symbol just before a function or a class definition. Probably you encountered them when you defined classmethods, properties etc. Or perhaps you used a web framework like Django and used them to magically add login requirements for certain pages by adding a @login_required line before your view function. Have you wondered how they exactly work and what they are? This article explores what function decorators are and how to write decorators.
 
 Decorator formalities
 -------------------------
 
-First let us deal with the formalities like definition, syntax, etc. What is a decorator? **A decorator is a callable that returns a callable.** Here is what Python does when it sees a decorator above a function definition. 
+First let us deal with the formalities like definition, syntax, etc. What is a decorator? **A decorator is a callable that returns a callable.** Here is what Python does when it sees a decorator above a function definition.
 
 +-----------------------+----------------------------+
 | Decorator without     | Decorator with             |
@@ -36,7 +36,7 @@ As you can see, strictly speaking we don't need the decorator syntax. We can acc
 Writing our own decorators
 ---------------------------
 
-Let us pretend we are writing a module with various business math functions and we decide that we cannot accept values of ``n`` (the term of the loan) less than or equal to zero. Of course, we can always embed that in our function logic, but that is repetitive, boring and also doesn't play well with this demonstration of decorators. So let us all just agree that we want to use decorators to accomplish this objective. 
+Let us pretend we are writing a module with various business math functions and we decide that we cannot accept values of ``n`` (the term of the loan) less than or equal to zero. Of course, we can always embed that in our function logic, but that is repetitive, boring and also doesn't play well with this demonstration of decorators. So let us all just agree that we want to use decorators to accomplish this objective.
 
 Here are a couple of functions in our module. ::
 
@@ -53,7 +53,7 @@ Let's start with what we need to accomplish. We should write a decorator ``accep
         ...
 
 Such that when you call the functions with ``n <= 0``, the functions raise an exception, and return the correct answer when called with ``n > 0``. In other words ``accept_n_gt_zero_only(simpleinterest)`` must have this behavior. So our decorator ``accept_n_gt_zero_only`` must take a function as an argument and return another function. Let's flesh it out. ::
-    
+
     # first draft ... incomplete
     def accept_n_gt_zero_only(f):
         def f_n_gt_zero():
@@ -99,7 +99,7 @@ Let's see if compound interest works. ::
     <function f_n_gt_zero at 0x9ee9454>
     >>> compoundinterest(10, 100, 5)
 
-Houston, we have a problem. All the decorated functions are going to have the same name - ``f_n_gt_zero``. This may not be a problem for only a couple of functions. But what if the number of functions increase? You can see where this is going to go ... straight to debug hell! 
+Houston, we have a problem. All the decorated functions are going to have the same name - ``f_n_gt_zero``. This may not be a problem for only a couple of functions. But what if the number of functions increase? You can see where this is going to go ... straight to debug hell!
 
 There's a decorator for that!
 -----------------------------
@@ -115,7 +115,7 @@ The ``functools`` library has a decorator called ``wraps`` that can be used to r
             # ... same as above ...
 
 Let's see what ``simpleinterest`` and ``compoundinterest`` look like now. ::
-    
+
     >>> simpleinterest; compoundinterest
     <function simpleinterest at 0x9d2d3e4>
     <function compoundinterest at 0x9d2d454>
@@ -140,7 +140,7 @@ In other words, ``accept_n_gt_N_only(N=7)`` must return a function (let's call i
     def accept_n_gt_N_only(N):
         # ... something here ...
         return wrapper
-        
+
 
 But wait! It's not that complicated! We already wrote a version of ``wrapper`` that takes a function like ``simpleinterest`` as an argument and returns the required function ... remember? Our own ``accept_n_gt_zero_only`` from above! All we need to do is change a bit of logic. ::
 
@@ -154,18 +154,18 @@ But wait! It's not that complicated! We already wrote a version of ``wrapper`` t
             return f_n_gt_zero
         return wrapper
 
-In essence, ``wrapper`` what actually takes our function ``simpleinterest`` and transforms it. We just code ``accept_n_gt_N_only`` to produce  ``wrapper``. Let us test this. ::
+In essence, ``wrapper`` actually takes our function ``simpleinterest`` and transforms it. We just code ``accept_n_gt_N_only`` to produce  ``wrapper``. Let us test this. ::
 
    @accept_n_gt_N_only(7)
    def simpleinterest(n, p, r):
        ...
-   
+
    >>> simpleinterest(10, 100, 5)
    50
    >>> simpleinterest(4, 100, 5)
    Exception: n must be > 7
 
-Voila! Success!! 
+Voila! Success!!
 
 A practical decorator example
 ------------------------------
@@ -176,7 +176,7 @@ Let us now look at a real life example where using a decorator makes our life ea
     def myview(request):
         pass
 
-Here is look at the innards of the ``require_http_methods`` decorator (Note: I eliminated some unnecessary cruft from the original code to keep it simple. So the actual definition in Django library will not look exactly like this.) ::
+Here is a look at the innards of the ``require_http_methods`` decorator (Note: I eliminated some unnecessary cruft from the original code to keep it simple. So the actual definition in Django library will not look exactly like this.) ::
 
     def require_http_methods(request_method_list):
         def decorator(func):
@@ -188,11 +188,11 @@ Here is look at the innards of the ``require_http_methods`` decorator (Note: I e
             return inner
         return decorator
 
-I am sure this looks very simple by now. 
+I am sure this looks very simple by now.
 
 Summary
 -------
-Decorators functions are just function that just return other functions and they aren't really that complicated once you get a hang of them. Used right, they can really help keep the code clean and elegant. Hope this article gave you enough material to get you started with writing your own decorators. 
+Decorators are functions that just return other functions and they aren't really that complicated once you get a hang of them. Used right, they can really help keep the code clean and elegant. Hope this article gave you enough material to get you started with writing your own decorators.
 
 .. seealso::
 
@@ -200,7 +200,7 @@ Decorators functions are just function that just return other functions and they
    - `Python Decorator Library <http://wiki.python.org/moin/PythonDecoratorLibrary>`_ - Python wiki page with a lot of examples of various decorators.
    - Bruce Eckels articles on decorators.
 
-     + `Decorators I - Introduction to Python Decorators <http://www.artima.com/weblogs/viewpost.jsp?thread=240808>`_ 
+     + `Decorators I - Introduction to Python Decorators <http://www.artima.com/weblogs/viewpost.jsp?thread=240808>`_
      + `Decorators II - Decorators with Arguments <http://www.artima.com/weblogs/viewpost.jsp?thread=240845>`_
      + `Decorators III: A Decorator-Based Build System <http://www.artima.com/weblogs/viewpost.jsp?thread=241209>`_
 
