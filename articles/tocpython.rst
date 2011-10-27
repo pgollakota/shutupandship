@@ -9,3 +9,4 @@ Python
    decorators/index
    file_modes/index
    why_unicode/index
+   logging/index
