@@ -8,7 +8,18 @@
 Welcome!
 ========
 
+Hello! My name is Praveen Gollakota. I am interested in Python and Django. You 
+can follow me on twitter `@pgollakota <http://twitter.com/#!/pgollakota>`_.
+
+Projects
+--------
+
+- `Django-Chartit <http://chartit.shutupandship.com>`_
+
+Articles
+---------
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    
    articles/toc
